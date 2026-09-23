@@ -9,6 +9,10 @@ metastore_db/
 derby.log
 *.crc
 
+# Dataset files (downloaded separately, see data/README.md)
+data/*
+!data/README.md
+
 # OS / editor / secrets
 .DS_Store
 Thumbs.db
