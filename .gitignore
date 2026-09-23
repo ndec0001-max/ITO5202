@@ -1,0 +1,22 @@
+# Jupyter / Python
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Spark local artefacts
+spark-warehouse/
+metastore_db/
+derby.log
+*.crc
+
+# Dataset files (downloaded separately, see data/README.md)
+data/*
+!data/README.md
+
+# OS / editor / secrets
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.env
+kaggle.json
