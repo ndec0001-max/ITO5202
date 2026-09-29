@@ -14,11 +14,18 @@ This project analyses the Olist Brazilian e-commerce dataset (about 100k orders 
 - **Part A** answers a multi-step business question: which product categories lead revenue in each Brazilian state and quarter, whether late deliveries are associated with lower review scores, and which high-revenue category–state combinations are held back by logistics. The query is implemented in both the DataFrame API and Spark SQL, and the two implementations are validated as equivalent.
 - **Part B** examines system behaviour: hash vs range partitioning on `product_id`, execution-time benchmarking, execution plan interpretation, and Spark Web UI DAG analysis.
 
+## Key findings
+- **Revenue:** health_beauty is the leading category nationally, appearing in the top 3 of all 21 qualifying states. Category leadership moved from a mix of categories in 2017 to health_beauty and watches_gifts in 2018.
+- **Delivery vs reviews:** late orders average 2.27 stars against 4.29 for on-time orders. This 2.02-point gap appears in every qualifying category and state.
+- **Logistics vs demand:** 21 of the 24 flagged top-3 slots are in Rio de Janeiro (RJ), a high-demand market held back by an 11.96% late-delivery rate.
+- **Performance:** the DataFrame API and Spark SQL compile to the same plan and perform the same. The pipeline's shuffles come from the aggregations and the window function; all joins are broadcast.
+
 ## Repository structure
 | Path | Purpose |
 |---|---|
 | `README.md` | This file |
 | `assessment1.ipynb` | Main notebook: all code, results and analysis |
+| `dag.png`, `dag_2_shuffles.png`, `dag_3_join.png`, `dag_4_window.png` | Spark Web UI DAG screenshots embedded in Part B.4 (top to bottom of the query DAG) 
 | `proposal/proposal.md` | Approved dataset proposal (Phase 1) |
 | `data/README.md` | How to download the dataset into `data/` |
 | `.gitignore` | Excludes the raw data, notebook checkpoints and system files |
@@ -34,6 +41,7 @@ The raw CSV files are **not** committed (see `data/README.md`).
 | CPU cores available to the container | 8 |
 | Spark driver memory | 4 GB |
 | Shuffle partitions | 16 (2 × cores) |
+| Adaptive Query Execution | Enabled (Spark default) |
 | Session time zone | UTC |
 
 Environment Setup part of the notebook prints the full environment table when it runs.
